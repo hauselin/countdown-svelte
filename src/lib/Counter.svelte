@@ -20,17 +20,21 @@
   <p>
     {today.format("LLLL")}
   </p>
-  <button>
-    {nextSunday.diff(today, "days")}
-  </button>
-  <button>
-    {nextYear.diff(today, "days")}
-  </button>
-  <button>{today.diff(start, "days")}</button>
-  <button>
-    {end.diff(today, "days")}
-  </button>
-  <button>
-    {perc.toFixed(1)}%
-  </button>
+  <p>
+    <button>
+      {nextSunday.diff(today, "days")}
+    </button>
+    <button>
+      {nextYear.diff(today, "days")}
+    </button>
+  </p>
+  <p>
+    <button>{today.diff(start, "days")}</button>
+    <button>
+      {end.diff(today, "days")}
+    </button>
+    <button>
+      {perc.toFixed(1)}%
+    </button>
+  </p>
 </main>
