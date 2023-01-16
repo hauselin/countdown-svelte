@@ -5,6 +5,7 @@
   let start = moment("1989-12-21");
   let end = start.clone().add(55, "y");
   let nextYear = moment().startOf("year").add(1, "year");
+  let perc = (today.diff(start, "days") / end.diff(start, "days")) * 100;
 
   const dayRequired = 7;
   let nextSunday;
@@ -19,14 +20,17 @@
   <p>
     {today.format("LLLL")}
   </p>
-  <button>{today.diff(start, "days")}</button>
   <button>
     {nextSunday.diff(today, "days")}
   </button>
   <button>
     {nextYear.diff(today, "days")}
   </button>
+  <button>{today.diff(start, "days")}</button>
   <button>
     {end.diff(today, "days")}
+  </button>
+  <button>
+    {perc.toFixed(1)}%
   </button>
 </main>
