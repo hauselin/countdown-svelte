@@ -1,34 +1,32 @@
 <script>
-  let today = new Date();
-  let date60 = new Date(2049, 12, 21); // 60 years from birthday
-  let nextYear = new Date(today.getFullYear() + 1, 0, 1);
-  let nextSunday = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() + ((7 - today.getDay()) % 7)
-  );
+  import moment from "moment";
 
-  const days = (end, start) => {
-    let difference = end.getTime() - start.getTime();
-    let diffDays = Math.ceil(difference / (1000 * 3600 * 24));
-    return diffDays;
-  };
+  let today = moment();
+  let start = moment("1989-12-21");
+  let end = start.clone().add(55, "y");
+  let nextYear = moment().startOf("year").add(1, "year");
 
-  // https://stackoverflow.com/questions/1643320/get-month-name-from-date
-  const month = today.toLocaleString("default", { month: "long" });
+  const dayRequired = 7;
+  let nextSunday;
+  if (moment().isoWeekday() <= dayRequired) {
+    nextSunday = moment().isoWeekday(dayRequired);
+  } else {
+    nextSunday = moment().add(1, "weeks").isoWeekday(dayRequired);
+  }
 </script>
 
 <main>
-  <p>{month}, {today.getDate()}</p>
+  <p>
+    {today.format("LLLL")}
+  </p>
+  <button>{today.diff(start, "days")}</button>
   <button>
-    {days(nextSunday, today)}
+    {nextSunday.diff(today, "days")}
   </button>
-
   <button>
-    {days(nextYear, today)}
+    {nextYear.diff(today, "days")}
   </button>
-
   <button>
-    {days(date60, today)}
+    {end.diff(today, "days")}
   </button>
 </main>
